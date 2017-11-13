@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="CustomMsBuildTask1" Version="1.0.0-alpha4">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="CustomMsBuildTask2" Version="1.0.0-alpha4">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  <Target Name="JsonTest1" DependsOnTargets="ResolveReferences">
+    <JsonTestTask1/>
+  </Target>
+  <Target Name="JsonTest2" DependsOnTargets="ResolveReferences">
+    <JsonTestTask2/>
+  </Target>
+
+</Project>
