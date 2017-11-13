@@ -36,7 +36,7 @@ namespace CustomMsBuildTask1
     {
         public override bool Execute()
         {
-            Log.LogMessage("serialized value:{0}", JsonConvert.SerializeObject(1));
+            Log.LogMessage("serialized value:{0}", Jil.JSON.Serialize(1));
             return true;
         }
     }

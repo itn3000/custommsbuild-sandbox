@@ -1,13 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <VersionPrefix>1.0.0-alpha4</VersionPrefix>
+    <TargetFrameworks>netstandard1.6;net46</TargetFrameworks>
+    <VersionPrefix>1.0.0-alpha15</VersionPrefix>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="15.3.409" />
+    <PackageReference Include="Jil" Version="2.15.4" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="MyCustomTestLibrary" Version="1.0.0"/>
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.6'">
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="15.3.409">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net46'">
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net46'">
+    <Reference Include="Microsoft.Build"/>
+    <Reference Include="Microsoft.Build.Framework"/>
+    <Reference Include="Microsoft.Build.Utilities.v4.0"/>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="compiler\resources\**\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**" />
@@ -19,11 +34,13 @@
       <PackagePath>build\</PackagePath>
     </Content>
   </ItemGroup>
+  <Target Name="CopyBuildFiles" AfterTargets="Build">
+  </Target>
   <Target Name="CollectRuntimeOutputs" BeforeTargets="_GetPackageFiles">
     <ItemGroup>
-      <Content Include="$(OutputPath)/*.dll;$(OutputPath)/*.json">
+      <Content Include="bin/$(Configuration)/**/*.dll;bin/$(Configuration)/**/*.json">
         <Pack>true</Pack>
-        <PackagePath>build\</PackagePath>
+        <PackagePath>build\%(RecursiveDir)</PackagePath>
       </Content>
     </ItemGroup>
   </Target>
