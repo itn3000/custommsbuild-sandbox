@@ -12,5 +12,9 @@ namespace MyLibrary
         {
             return Jil.JSON.Serialize(1);
         }
+        public static void Main(string[] args)
+        {
+            return;
+        }
     }
 }

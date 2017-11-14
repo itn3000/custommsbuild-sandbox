@@ -6,7 +6,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CustomMsBuildTask1" Version="1.0.0-alpha15">
+    <PackageReference Include="CustomMsBuildTask1" Version="1.0.0-alpha16">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="CustomMsBuildTask2" Version="1.0.0-alpha4">
